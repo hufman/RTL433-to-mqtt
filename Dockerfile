@@ -10,7 +10,20 @@
 # Special attention is required to allow the container to access the USB device that is plugged into the host.
 # The container needs priviliged access to /dev/bus/usb on the host.
 #
-# docker run --name rtl_433 -d -e MQTT_HOST=<mqtt-broker.example.com>   --privileged -v /dev/bus/usb:/dev/bus/usb  <image>
+## Starting with Docker
+#docker run -d --rm \
+#  --privileged \
+#  -v /dev/bus/usb:/dev/bus/usb \
+#  --env MQTT_HOST="mqtt.example.com" \   # Required
+#  --env MQTT_TOPIC="sensors/rtl_433" \   # Default="sensors/rtl_433"
+#  --env MQTT_PORT=1883 \                 # Default=1883
+#  --env MQTT_USER="" \                   # Not Required
+#  --env MQTT_PASS="" \                   # Not Required
+#  --env MQTT_QOS=0 \                     # Default=0
+#  --env DEBUG=False \                    # Change to True to log all MQTT messages
+#  --name rtl_433-mqtt \
+#  rtl_433-mqtt:latest
+#
 
 FROM ubuntu:18.04
 MAINTAINER Paul Coiner
@@ -19,7 +32,7 @@ LABEL Description="This image is used to start a script that will monitor for ev
 
 
 #
-# First install software packages needed to compile rtl_433 and to publish MQTT events
+# First install software packages for rtl_433 and to publish MQTT events
 #
 RUN apt-get update && apt-get install -y \
 	rtl-sdr \

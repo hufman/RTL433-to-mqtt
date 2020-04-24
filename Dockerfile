@@ -10,7 +10,8 @@
 # Special attention is required to allow the container to access the USB device that is plugged into the host.
 # The container needs priviliged access to /dev/bus/usb on the host.
 #
-## Starting with Docker
+## Starting with docker run
+#
 #docker run -d --rm \
 #  --privileged \
 #  -v /dev/bus/usb:/dev/bus/usb \
@@ -21,9 +22,9 @@
 #  --env MQTT_PASS="" \                   # Not Required
 #  --env MQTT_QOS=0 \                     # Default=0
 #  --env DEBUG=False \                    # Change to True to log all MQTT messages
-#  --name rtl_433-mqtt \
-#  rtl_433-mqtt:latest
-#
+#  --name rtl433-to-mqtt \
+#  pcoiner/rtl433-to-mqtt:latest
+
 
 FROM ubuntu:18.04
 MAINTAINER Paul Coiner
@@ -39,8 +40,8 @@ RUN apt-get update && apt-get install -y \
 	librtlsdr0 \
 	python3-paho-mqtt
 
-COPY rtl-433_r20.02_amd64.deb /tmp/rtl-433_r20.02_amd64.deb
-RUN dpkg -i /tmp/rtl-433_r20.02_amd64.deb
+COPY rtl-433_20.02-1_amd64.deb /tmp/rtl-433_20.02-1_amd64.deb
+RUN dpkg -i /tmp/rtl-433_20.02-1_amd64.deb
 
 #
 # Copy config, script and make it executable

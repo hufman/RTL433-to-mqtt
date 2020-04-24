@@ -36,23 +36,15 @@ sensors/rtl_433 {"time" : "2018-07-05 09:48:22", "model" : "AlectoV1 Rain Sensor
 Note that spaces can be used in topic names!
 
 
-## Configuration
-Copy the file `config.py.example` to `config.py` and change the settings by editting this file.
 
-Once you're done you can connect the RTL-SDR to a USB port and start using the
-python script.
 
-## Building Docker
+## Pulling docker container from dockerhub
 ```bash
-git clone https://github.com/orrious/RTL433-to-mqtt.git
-cd RTL433-to-mqtt
-docker build -t rtl_433-mqtt:latest .
+docker pull pcoiner/rtl433-to-mqtt:latest
 ```
 
-This will build the image needed to start a container. When the build process is completed start the container:
 
-
-## Starting with Docker
+## Starting with docker run
 
 ```bash
 docker run -d --rm \
@@ -65,25 +57,35 @@ docker run -d --rm \
   --env MQTT_PASS="" \                   # Not Required
   --env MQTT_QOS=0 \                     # Default=0
   --env DEBUG=False \                    # Change to True to log all MQTT messages
-  --name rtl_433-mqtt \
-  rtl_433-mqtt:latest
+  --name rtl433-to-mqtt \
+  pcoiner/rtl433-to-mqtt:latest
 ```
 
 ## docker-compose.yaml
 ```bash
-rtl_433-mqtt:
-    container_name: rtl_433-mqtt
+
+  rtl433-to-mqtt:
+    container_name: rtl433-to-mqtt
     privileged: true
-    image: rtl_433-mqtt:latest
+    image: pcoiner/rtl433-to-mqtt:latest
     environment:
-      - MQTT_HOST="mqtt.example.com"
-#      - MQTT_TOPIC="sensors/rtl_433"
-#      - MQTT_PORT=1883
-#      - MQTT_USER=""
-#      - MQTT_PASS=""
-#      - MQTT_QOS=0
-#      - DEBUG=False 
+      MQTT_HOST: 'mqtt.example.com'
+#      MQTT_TOPIC: 'sensors/rtl_433'
+#      MQTT_PORT: '1883'
+#      MQTT_USER: ''
+#      MQTT_PASS: ''
+#      MQTT_QOS: '0'
+#      DEBUG: 'False'
     devices:
-      - /dev/bus/usb:/dev/bus/usb:rwm
+      - /dev/bus/usb:/dev/bus/usb
     restart: always
 ```
+
+## Building docker from source
+```bash
+git clone https://github.com/orrious/RTL433-to-mqtt.git
+cd RTL433-to-mqtt
+docker build -t rtl433-to-mqtt:latest .
+```
+
+This will build the image needed to start a container. When the build process is completed start the container:

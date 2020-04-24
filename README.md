@@ -1,4 +1,4 @@
-# RTL433 to mqtt gateway
+# RTL_433 to MQTT gateway
 
 Lightweight docker container built on Ubuntu 18:04 that uses python3, rtl_433, rtls_sdr, and paho_mqtt
 Using the well known rtl_433 software and an inexpensive RTL-SDR receiver it will listen to a variety 

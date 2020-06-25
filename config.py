@@ -32,3 +32,5 @@ if "MQTT_QOS" in os.environ:
 
 if "DEBUG" in os.environ:
     DEBUG = os.environ.get("DEBUG")
+
+MQTT_PORT = int(MQTT_PORT)

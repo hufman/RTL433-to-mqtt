@@ -9,6 +9,7 @@ MQTT_HOST="mqtt.example.com"
 MQTT_PORT=1883
 MQTT_TOPIC="sensors/rtl_433"
 MQTT_QOS=0
+RTL_OPTS=""
 DEBUG=False # Change to True to log all MQTT messages
 # End config section
 
@@ -29,6 +30,9 @@ if "MQTT_TOPIC" in os.environ:
 
 if "MQTT_QOS" in os.environ:
     MQTT_QOS = os.environ.get("MQTT_QOS")
+
+if "RTL_OPTS" in os.environ:
+    RTL_OPTS = os.environ.get("RTL_OPTS")
 
 if "DEBUG" in os.environ:
     DEBUG = os.environ.get("DEBUG")

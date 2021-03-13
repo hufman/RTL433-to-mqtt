@@ -56,6 +56,7 @@ docker run -d --rm \
   --env MQTT_USER="" \                   # Not Required
   --env MQTT_PASS="" \                   # Not Required
   --env MQTT_QOS=0 \                     # Default=0
+  --env RTL_OPTS="" \                    # Any extra rtl_433 options
   --env DEBUG=False \                    # Change to True to log all MQTT messages
   --name rtl433-to-mqtt \
   pcoiner/rtl433-to-mqtt:latest
@@ -75,6 +76,7 @@ docker run -d --rm \
 #      MQTT_USER: ''
 #      MQTT_PASS: ''
 #      MQTT_QOS: '0'
+#      RTL_OPTS: ''
 #      DEBUG: 'False'
     devices:
       - /dev/bus/usb:/dev/bus/usb

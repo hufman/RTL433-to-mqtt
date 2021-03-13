@@ -13,6 +13,9 @@ from config import *
 
 rtl_433_cmd = "/usr/local/bin/rtl_433 -F json"
 
+if RTL_OPTS:
+    rtl_433_cmd = rtl_433_cmd + " " + RTL_OPTS
+
 important_rtl_output_re = re.compile("^(Found|Tuned)")
 
 # Define MQTT event callbacks

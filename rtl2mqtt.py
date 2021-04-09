@@ -96,6 +96,7 @@ while True:
                 if item == "id":
                     subtopic += "/" + str(value)
 
+            mqttc.publish(MQTT_TOPIC+"/"+subtopic, payload=line, qos=MQTT_QOS, retain=True)
             for item in json_dict:
                 value = json_dict[item]
                 if not "model" in item:
